@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Teacher's list</title>
+{% endblock %}
+
+{% block view %}
+    <h2> Teacher's list</h2>
+{% endblock %}
+
+{% block content %}
+<form method="get">
+    <label>First name:</label>
+    <input type="text"  name="first_name"><br><br>
+
+    <label>Last name:</label>
+    <input type="text" name="last_name"><br><br>
+
+    <label>Phone number:</label>
+    <input type="text" name="phone_number"><br><br>
+
+    <label>City:</label>
+    <input type="text" name="city"><br><br>
+
+    <input type="submit" value="Submit">
+    </form>
+
+    <p><strong>Teacher's count {{ teachers.count }}</strong></p>
+
+    <table class="table table-sm">
+        <tr>
+            <th>N</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Phone number</th>
+            <th>City</th>
+            <th><i class="bi bi-pencil"></i></th>
+            <th><i class="bi bi-trash-fill"></i></th>
+        </tr>
+        {% for teach in teachers %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{teach.first_name}}</td>
+            <td>{{teach.last_name}}</td>
+            <td>{{teach.phone_number}}</td>
+            <td>{{teach.city}}</td>
+            <td> <a href = "{% url 'teachers:update' teach.id %}">EDIT</a> </td>
+            <td> <a href = "{% url 'teachers:delete' teach.id %}">DELETE</a> </td>
+        </tr>
+        {% endfor %}
+    </table>>
+{% endblock %}
