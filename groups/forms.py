@@ -1,3 +1,4 @@
+import django_filters
 from django.core.exceptions import ValidationError
 from django.forms import DateInput, ModelForm
 
@@ -46,3 +47,12 @@ class GroupUpdateForm(GroupBaseForm):
     class Meta(GroupBaseForm.Meta):
         model = Group
         fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
+
+
+class GroupsFilter(django_filters.FilterSet):
+    class Meta:
+        model = Group
+        fields = {
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith'],
+        }
