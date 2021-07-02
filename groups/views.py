@@ -4,7 +4,7 @@ from django.urls import reverse
 
 from faker import Faker
 
-from groups.forms import GroupCreateForm, GroupUpdateForm
+from groups.forms import GroupCreateForm, GroupUpdateForm, GroupsFilter
 from groups.models import Group
 
 from webargs import fields
@@ -59,10 +59,15 @@ def get_groups(request, args):
         if param_values:
             groups = groups.filter(**{param_name: param_values})
 
+    obj_filter = GroupsFilter(data=request.GET, queryset=groups)
+
     return render(
         request=request,
         template_name='groups/list.html',
-        context={'groups': groups}
+        context={
+            'groups': groups,
+            'obj_filter': obj_filter,
+        }
     )
 
 

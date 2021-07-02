@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from teachers.forms import TeacherCreateForm, TeacherUpdateForm
+from teachers.forms import TeacherCreateForm, TeacherUpdateForm, TeacherFilter
 from teachers.models import Teacher
 
 from webargs import fields
@@ -31,14 +31,17 @@ def get_teachers(request, args):
         if param_values:
             teachers = teachers.filter(**{param_name: param_values})
 
+    obj_filter = TeacherFilter(data=request.GET, queryset=teachers)
+
     return render(
         request=request,
         template_name='teachers/list.html',
-        context={'teachers': teachers}
+        context={
+            'teachers': teachers,
+            'obj_filter': obj_filter,
+        }
     )
 
-
-@csrf_exempt
 def create_teacher(request):
 
     if request.method == 'GET':
@@ -59,8 +62,6 @@ def create_teacher(request):
         context={'form': form}
     )
 
-
-@csrf_exempt
 def update_teacher(request, pk):
 
     teachers = get_object_or_404(Teacher, id=pk)
