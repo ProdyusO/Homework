@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'django_filters',
     'crispy_forms',
-
+    'Courses',
+    'core',
     'groups',
     'teachers',
 ]

@@ -54,10 +54,10 @@ def generate_students(request, count):
     location="query"
         )
 def get_groups(request, args):
-    groups = Group.objects.all()
-    for param_name, param_values in args.items():
-        if param_values:
-            groups = groups.filter(**{param_name: param_values})
+    groups = Group.objects.all().select_related('teacher')
+    # for param_name, param_values in args.items():
+    #     if param_values:
+    #         groups = groups.filter(**{param_name: param_values})
 
     obj_filter = GroupsFilter(data=request.GET, queryset=groups)
 
@@ -65,7 +65,7 @@ def get_groups(request, args):
         request=request,
         template_name='groups/list.html',
         context={
-            'groups': groups,
+            #'groups': groups,
             'obj_filter': obj_filter,
         }
     )

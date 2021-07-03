@@ -3,38 +3,19 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>Group's list</title>
+    Group's list
 {% endblock %}
 
-{% block view %}
-    <h2> Group's list </h2>
+{% block header %}
+    List of group
+    {{ student.teacher }}
 {% endblock %}
-
 
 {% block content %}
 <form method="get">
-<!--        <label>First name:</label>-->
-<!--        <input type="text"  name="first_name"><br><br>-->
-
-<!--        <label>Last name:</label>-->
-<!--        <input type="text" name="last_name"><br><br>-->
-
-<!--        <label>City:</label>-->
-<!--        <input type="text" name="phone_number"><br><br>-->
-
-<!--        <label>Phone number:</label>-->
-<!--        <input type="number" name="city"><br><br>-->
-
-<!--        <label>Birthday:</label>-->
-<!--        <input type="number" name="city"><br><br>-->
-
-<!--        <label>Email:</label>-->
-<!--        <input type="text" name="city"><br><br>-->
-
     {{ obj_filter.form | crispy }}
-
-        <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
-    </form>
+    <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
+</form>
 
     <p><strong>Student's count {{ obj_filter.qs.count }}</strong></p>
 
@@ -47,6 +28,8 @@
             <th>Phone number</th>
             <th>Birthday</th>
             <th>Email</th>
+            <th>Teachers</th>
+            <th>Course</th>
             <th><i class="bi bi-pencil"></i></th>
             <th><i class="bi bi-trash-fill"></i></th>
         </tr>
@@ -59,6 +42,8 @@
             <td>{{student.phone_number}}</td>
             <td>{{student.birthday}}</td>
             <td>{{student.email}}</td>
+            <td>{% if student.teacher %}{{ student.teacher }}{% endif %}</td>
+            <td>{% if student.course %}{{ student.course }}{% endif %}</td>
             <td> <a href = "{% url 'groups:update' student.id %}">EDIT</a> </td>
             <td> <a href = "{% url 'groups:delete' student.id %}">DELETE</a> </td>
         </tr>

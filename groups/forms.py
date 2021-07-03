@@ -40,13 +40,17 @@ class GroupBaseForm(ModelForm):
 
 
 class GroupCreateForm(GroupBaseForm):
-    pass
+    class Meta(GroupBaseForm.Meta):
+        model = Group
+        # fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
+        fields = '__all__'
 
 
 class GroupUpdateForm(GroupBaseForm):
     class Meta(GroupBaseForm.Meta):
         model = Group
-        fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
+        #fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
+        fields = '__all__'
 
 
 class GroupsFilter(django_filters.FilterSet):

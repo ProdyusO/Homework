@@ -3,17 +3,18 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-    <title>Create teacher</title>
+    Create teacher
 {% endblock %}
 
-{% block view %}
-    <h2> Creating teacher </h2>
+{% block header %}
+    Creating teacher
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
         {{ form | crispy }}
-        <input type="submit" value="Create">
+        <input class="btn btn-success mb-3 mt-3" type="submit" value="Create">
+        <a class="btn btn-primary" href="{% url 'teachers:list' %}">Cancel</a>
     </form>
 {% endblock %}
