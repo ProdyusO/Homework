@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
 
 from teachers.forms import TeacherCreateForm, TeacherUpdateForm, TeacherFilter
 from teachers.models import Teacher
@@ -27,9 +26,9 @@ from webargs.djangoparser import use_args
         )
 def get_teachers(request, args):
     teachers = Teacher.objects.all()
-    for param_name, param_values in args.items():
-        if param_values:
-            teachers = teachers.filter(**{param_name: param_values})
+    # for param_name, param_values in args.items():
+    #     if param_values:
+    #         teachers = teachers.filter(**{param_name: param_values})
 
     obj_filter = TeacherFilter(data=request.GET, queryset=teachers)
 

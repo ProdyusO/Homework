@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Course's list
+{% endblock %}
+
+{% block header %}
+    List of course
+{% endblock %}
+
+{% block content %}
+<form method="get">
+    {{ course.form | crispy }}
+    <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
+    </form>
+
+    <p><strong>Course's count {{ course.qs.count }}</strong></p>
+
+    <table class="table table-sm">
+        <tr>
+            <th>N</th>
+            <th>Discipline</th>
+            <th><i class="bi bi-pencil"></i></th>
+            <th><i class="bi bi-trash-fill"></i></th>
+        </tr>
+        {% for args in course %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{args.discipline}}</td>
+            <!--            <td>{%if teach.groups %}{{teach.groups}}{% endif %}</td>-->
+            <td> <a href = "{% url 'courses:update' args.id %}">EDIT</a> </td>
+            <td> <a href = "{% url 'courses:delete' args.id %}">DELETE</a> </td>
+        </tr>
+        {% endfor %}
+    </table>>
+{% endblock %}

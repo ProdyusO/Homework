@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Delete student
+    Delete course
 {% endblock %}
 
 {% block header %}
-   Removing student
+   Removing course
 {% endblock %}
 
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure to delete {{groups.first_name}} {{groups.last_name}} ?</p>
+        <p>Are you sure to delete {{course.discipline}} ?</p>
         <input class="btn btn-primary" type="submit" value="Agree">
-        <a class="btn btn-danger" href="{% url 'groups:list' %}">Cancel</a>
+        <a class="btn btn-danger" href="{% url 'courses:list' %}">Cancel</a>
     </form>
 {% endblock %}
