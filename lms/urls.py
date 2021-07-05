@@ -11,5 +11,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('groups/', include('groups.urls')),
     path('teachers/', include('teachers.urls')),
+    path('courses/', include('courses.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]

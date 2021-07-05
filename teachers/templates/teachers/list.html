@@ -25,7 +25,7 @@
             <th>Last name</th>
             <th>Phone number</th>
             <th>City</th>
-<!--            <th>Group</th>-->
+            <th>Email</th>
             <th><i class="bi bi-pencil"></i></th>
             <th><i class="bi bi-trash-fill"></i></th>
         </tr>
@@ -36,6 +36,7 @@
             <td>{{teach.last_name}}</td>
             <td>{{teach.phone_number}}</td>
             <td>{{teach.city}}</td>
+            <td>{{teach.email}}</td>
 <!--            <td>{%if teach.groups %}{{teach.groups}}{% endif %}</td>-->
             <td> <a href = "{% url 'teachers:update' teach.id %}">EDIT</a> </td>
             <td> <a href = "{% url 'teachers:delete' teach.id %}">DELETE</a> </td>

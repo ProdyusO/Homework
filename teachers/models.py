@@ -21,5 +21,6 @@ class Teacher(Person):
                 last_name=faker.last_name(),
                 phone_number=faker.phone_number(),
                 city=faker.city(),
+                email=faker.email(),
             )
             st.save()

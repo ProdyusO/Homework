@@ -8,7 +8,6 @@
 
 {% block header %}
     List of group
-    {{ student.teacher }}
 {% endblock %}
 
 {% block content %}
@@ -29,7 +28,6 @@
             <th>Birthday</th>
             <th>Email</th>
             <th>Teachers</th>
-            <th>Course</th>
             <th><i class="bi bi-pencil"></i></th>
             <th><i class="bi bi-trash-fill"></i></th>
         </tr>
@@ -43,7 +41,6 @@
             <td>{{student.birthday}}</td>
             <td>{{student.email}}</td>
             <td>{% if student.teacher %}{{ student.teacher }}{% endif %}</td>
-            <td>{% if student.course %}{{ student.course }}{% endif %}</td>
             <td> <a href = "{% url 'groups:update' student.id %}">EDIT</a> </td>
             <td> <a href = "{% url 'groups:delete' student.id %}">DELETE</a> </td>
         </tr>

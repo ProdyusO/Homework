@@ -11,49 +11,49 @@ from webargs import fields
 from webargs.djangoparser import use_args, use_kwargs
 
 
-fake = Faker()
+# fake = Faker()
+#
+#
+# @use_kwargs({
+#     "count": fields.Int(
+#         required=False,
+#         missing=10
+#      )},
+#     location="query"
+#     )
+# def generate_students(request, count):
+#     fake = Faker()
+#     fake_n = []
+#     for i in range(count):
+#         fake_n.append(str(fake.name()).split())
+#         fake_n.append(fake.phone_number())
+#     s = Group(first_name=fake_n[0][0], last_name=fake_n[0][1], phone_number=fake_n[1])
+#     s.save()
+#     return HttpResponse(fake_n)
 
 
-@use_kwargs({
-    "count": fields.Int(
-        required=False,
-        missing=10
-     )},
-    location="query"
-    )
-def generate_students(request, count):
-    fake = Faker()
-    fake_n = []
-    for i in range(count):
-        fake_n.append(str(fake.name()).split())
-        fake_n.append(fake.phone_number())
-    s = Group(first_name=fake_n[0][0], last_name=fake_n[0][1], phone_number=fake_n[1])
-    s.save()
-    return HttpResponse(fake_n)
-
-
-@use_args({
-    "first_name": fields.Str(
-        required=False
-        ),
-    "last_name": fields.Str(
-        required=False
-        ),
-    "city": fields.Str(
-        required=False
-        ),
-    "birthday": fields.Str(
-        required=False
-        ),
-    "phone_number": fields.Str(
-        required=False
-        ),
-    "email": fields.Str(
-        required=False
-        )},
-    location="query"
-        )
-def get_groups(request, args):
+# @use_args({
+#     "first_name": fields.Str(
+#         required=False
+#         ),
+#     "last_name": fields.Str(
+#         required=False
+#         ),
+#     "city": fields.Str(
+#         required=False
+#         ),
+#     "birthday": fields.Str(
+#         required=False
+#         ),
+#     "phone_number": fields.Str(
+#         required=False
+#         ),
+#     "email": fields.Str(
+#         required=False
+#         )},
+#     location="query"
+#         )
+def get_groups(request):
     groups = Group.objects.all().select_related('teacher')
     # for param_name, param_values in args.items():
     #     if param_values:
