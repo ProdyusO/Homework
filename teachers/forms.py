@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-import django_filters
+
+import django_filters # noqa
 
 from teachers.models import Teacher
 
@@ -27,15 +28,16 @@ class TeacherCreateForm(TeacherBaseForm):
 
 
 class TeacherUpdateForm(TeacherBaseForm):
-    class Meta(TeacherBaseForm.Meta):
-        model = Teacher
-        fields = ['first_name', 'last_name', 'phone_number', 'city']
+    pass
 
 
-class TeacherFilter(django_filters.FilterSet):
-    class Meta:
-        model = Teacher
-        fields = {
-            'first_name': ['exact', 'icontains'],
-            'last_name': ['exact', 'startswith'],
-        }
+class TeacherDeleteForm(TeacherBaseForm):
+    pass
+
+# class TeacherFilter(django_filters.FilterSet):
+#     class Meta:
+#         model = Teacher
+#         fields = {
+#             'first_name': ['exact', 'icontains'],
+#             'last_name': ['exact', 'startswith'],
+#         }
