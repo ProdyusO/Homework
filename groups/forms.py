@@ -1,6 +1,7 @@
-import django_filters
 from django.core.exceptions import ValidationError
 from django.forms import DateInput, ModelForm
+
+import django_filters # noqa
 
 from groups.models import Group
 
@@ -40,23 +41,20 @@ class GroupBaseForm(ModelForm):
 
 
 class GroupCreateForm(GroupBaseForm):
-    class Meta(GroupBaseForm.Meta):
-        model = Group
-        # fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
-        fields = '__all__'
+    pass
 
 
 class GroupUpdateForm(GroupBaseForm):
-    class Meta(GroupBaseForm.Meta):
-        model = Group
-        #fields = ['first_name', 'last_name', 'city', 'phone_number', 'birthday', 'email']
-        fields = '__all__'
+    pass
 
 
-class GroupsFilter(django_filters.FilterSet):
-    class Meta:
-        model = Group
-        fields = {
-            'first_name': ['exact', 'icontains'],
-            'last_name': ['exact', 'startswith'],
-        }
+class GroupDeleteForm(GroupBaseForm):
+    pass
+
+# class GroupsFilter(django_filters.FilterSet):
+#     class Meta:
+#         model = Group
+#         fields = {
+#             'first_name': ['exact', 'icontains'],
+#             'last_name': ['exact', 'startswith'],
+#         }

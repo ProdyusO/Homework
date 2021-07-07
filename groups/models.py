@@ -1,11 +1,13 @@
 import datetime
 
+from core.models import Person
+
 from django.db import models
 
 from faker import Faker
 
-from core.models import Person
 from groups.validators import adult_validation
+
 from teachers.models import Teacher
 
 
@@ -18,7 +20,7 @@ class Group(Person):
         return f' {self.phone_number}, {self.birthday}, {self.teacher}'
 
     @staticmethod
-    def generate_students(count):
+    def generate_groups(count):
         faker = Faker()
         for _ in range(count):
             st = Group(

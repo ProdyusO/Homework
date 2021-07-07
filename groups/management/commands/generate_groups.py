@@ -8,4 +8,4 @@ class Command(BaseCommand):
         parser.add_argument(nargs='+', type=int, dest='args')
 
     def handle(self, *args, **options):
-        Group.generate_students(args[0])
+        Group.generate_groups(args[0])

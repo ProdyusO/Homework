@@ -12,11 +12,11 @@
 
 {% block content %}
 <form method="get">
-    {{ obj_filter.form | crispy }}
+    {{ object_list.form | crispy }}
     <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
 </form>
 
-    <p><strong>Student's count {{ obj_filter.qs.count }}</strong></p>
+    <p><strong>Student's count {{ object_list.count }}</strong></p>
 
     <table class="table table-sm">
         <tr>
@@ -31,7 +31,7 @@
             <th><i class="bi bi-pencil"></i></th>
             <th><i class="bi bi-trash-fill"></i></th>
         </tr>
-        {% for student in obj_filter.qs %}
+        {% for student in object_list %}
         <tr>
             <td>{{forloop.counter}}</td>
             <td>{{student.first_name}}</td>

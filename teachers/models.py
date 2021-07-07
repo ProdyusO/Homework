@@ -1,9 +1,8 @@
+from core.models import Person
 
 from django.db import models
 
 from faker import Faker
-
-from core.models import Person
 
 
 class Teacher(Person):
