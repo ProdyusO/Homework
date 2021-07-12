@@ -11,12 +11,13 @@
 {% endblock %}
 
 {% block content %}
+<div class="collapse" id="collapseExample">
 <form method="get">
     {{ object_list.form | crispy }}
     <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
     </form>
-
-    <p><strong>Teacher's count {{ obj_filter.qs.count }}</strong></p>
+</div>
+    <p><strong>Teacher's count {{ object_list.count }}</strong></p>
 
     <table class="table table-sm">
         <tr>

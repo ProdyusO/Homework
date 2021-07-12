@@ -37,14 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'debug_toolbar',
     'django_extensions',
     'django_filters',
     'crispy_forms',
+
     'core',
     'courses',
     'groups',
     'teachers',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +140,5 @@ INTERNAL_IPS = [
     ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_PORT = 1025

@@ -6,4 +6,4 @@ class Course(models.Model):
     course = models.OneToOneField('groups.Group', on_delete=models.SET_NULL, null=True, related_name='number_course')
 
     def __str__(self):
-        return f'{self.discipline}'
+        return f'{self.discipline}, {self.course}'
