@@ -11,7 +11,7 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <p>Are you sure to delete {{teachers.first_name}} {{teachers.last_name}} ?</p>
+        <p>Are you sure to delete {{object.first_name}} {{object.last_name}} ?</p>
         <input class="btn btn-primary" type="submit" value="Agree">
         <a class="btn btn-danger" href="{% url 'teachers:list' %}">Cancel</a>
     </form>
