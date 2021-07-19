@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy, reverse
@@ -21,6 +22,13 @@ class AccountLoginView(LoginView):
             return param_next
         return reverse('index')
 
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(self.request, f'User {self.request.user} successfully logged in')
+        messages.info(self.request, f'User {self.request.user} successfully logged in')
+        messages.warning(self.request, f'User {self.request.user} successfully logged in')
+
+        return result
 
 class AccountLogoutView(LogoutView):
     template_name = 'accounts/logout.html'

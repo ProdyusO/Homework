@@ -1,14 +1,14 @@
 from courses.forms import CourseBaseForm, CourseCreateForm, CourseDeleteForm, CourseUpdateForm
 from courses.models import Course
 from django.http import HttpResponseRedirect # noqa
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render # noqa
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from django.urls import reverse, reverse_lazy # noqa
 
 
-class CourseListView(ListView):
+class CourseListView(LoginRequiredMixin, ListView):
     model = Course
     form_class = CourseBaseForm
     success_url = reverse_lazy('courses:list')
@@ -24,7 +24,7 @@ class CourseListView(ListView):
 #     )
 
 
-class CourseCreateView(CreateView):
+class CourseCreateView(LoginRequiredMixin, CreateView):
     model = Course
     form_class = CourseCreateForm
     success_url = reverse_lazy('courses:list')
@@ -51,7 +51,7 @@ class CourseCreateView(CreateView):
 #     )
 
 
-class CourseUpdateView(UpdateView):
+class CourseUpdateView(LoginRequiredMixin, UpdateView):
     model = Course
     form_class = CourseUpdateForm
     success_url = reverse_lazy('courses:list')
@@ -83,7 +83,7 @@ class CourseUpdateView(UpdateView):
 #     )
 
 
-class CourseDeleteView(DeleteView):
+class CourseDeleteView(LoginRequiredMixin, DeleteView):
     model = Course
     form_class = CourseDeleteForm
     success_url = reverse_lazy('courses:list')

@@ -17,7 +17,7 @@ class Group(Person):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=True, related_name='students')
 
     def __str__(self):
-        return f' {self.phone_number}, {self.birthday}, {self.teacher}'
+        return f' {self.phone_number}, {self.birthday}, {self.teacher}, {self.first_name}, {self.last_name}'
 
     @staticmethod
     def generate_groups(count):
