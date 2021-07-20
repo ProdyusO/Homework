@@ -4,9 +4,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy  # noqa
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
-from teachers.forms import TeacherBaseForm, TeacherCreateForm, TeacherDeleteForm, TeacherUpdateForm
+from teachers.forms import TeacherBaseForm, TeacherCreateForm, TeacherDeleteForm, TeacherUpdateForm, TeacherFilter
 from teachers.models import Teacher
 
+from copy import copy
 # from webargs import fields
 # from webargs.djangoparser import use_args
 
@@ -102,10 +103,30 @@ from teachers.models import Teacher
 
 
 class TeacherListView(LoginRequiredMixin, ListView):
+    paginate_by = 15
     model = Teacher
     form_class = TeacherBaseForm
     success_url = reverse_lazy('teachers:list')
     template_name = 'teachers/list.html'
+
+    def get_filter(self):
+        return TeacherFilter(
+            data=self.request.GET,
+            queryset=self.model.objects.all().order_by('id')
+        )
+
+    def get_queryset(self):
+        return self.get_filter().qs
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_filter'] = self.get_filter()
+        params = self.request.GET
+        if 'page' in params:
+            params = copy(params)
+            del params['page']
+        context['get_params'] = params.urlencode()
+        return context
 
 
 class TeacherCreateView(LoginRequiredMixin, CreateView):

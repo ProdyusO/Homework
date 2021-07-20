@@ -34,10 +34,10 @@ class TeacherUpdateForm(TeacherBaseForm):
 class TeacherDeleteForm(TeacherBaseForm):
     pass
 
-# class TeacherFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = Teacher
-#         fields = {
-#             'first_name': ['exact', 'icontains'],
-#             'last_name': ['exact', 'startswith'],
-#         }
+class TeacherFilter(django_filters.FilterSet):
+    class Meta:
+        model = Teacher
+        fields = {
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith'],
+        }

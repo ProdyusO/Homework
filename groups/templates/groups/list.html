@@ -14,7 +14,7 @@
 <div class="collapse" id="collapseExample">
     <form method="get">
         {% csrf_token %}
-        {{ object_list.form | crispy }}
+        {{ object_filter.form | crispy }}
         <input class="btn btn-success mb-3 mt-3" type="submit" value="Search">
     </form>
 </div>
@@ -35,7 +35,7 @@
         </tr>
         {% for student in object_list %}
         <tr>
-            <td>{{forloop.counter}}</td>
+            <td>{{page_obj.start_index|add:forloop.counter0}}</td>
             <td>{{student.first_name}}</td>
             <td>{{student.last_name}}</td>
             <td>{{student.city}}</td>
@@ -48,5 +48,7 @@
         </tr>
         {% endfor %}
     </table>>
-
+    {% if is_paginated %}
+        {% include 'includes/paginator.html' %}
+    {% endif %}
 {% endblock %}

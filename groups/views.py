@@ -7,14 +7,14 @@ from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from faker import Faker # noqa
 
-from groups.forms import GroupBaseForm, GroupCreateForm, GroupDeleteForm, GroupUpdateForm
+from groups.forms import GroupBaseForm, GroupCreateForm, GroupDeleteForm, GroupUpdateForm, GroupsFilter
 from groups.models import Group
 
 
 from webargs import fields # noqa
 from webargs.djangoparser import use_args, use_kwargs # noqa
 
-
+from copy import copy
 # fake = Faker()
 #
 #
@@ -60,10 +60,31 @@ from webargs.djangoparser import use_args, use_kwargs # noqa
 
 
 class GroupListView(LoginRequiredMixin, ListView):
+    paginate_by = 15
     model = Group
     form_class = GroupBaseForm
     success_url = reverse_lazy('groups:list')
     template_name = 'groups/list.html'
+
+    def get_filter(self):
+        return GroupsFilter(
+            data=self.request.GET,
+            queryset=self.model.objects.all().select_related('number_course').order_by('id')
+        )
+
+    def get_queryset(self):
+        return self.get_filter().qs
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object_filter'] = self.get_filter()
+        params = self.request.GET
+        if 'page' in params:
+            params = copy(params)
+            del params['page']
+        context['get_params'] = params.urlencode()
+        return context
+
 
 # def get_groups(request):
 #     groups = Group.objects.all().select_related('teacher')
