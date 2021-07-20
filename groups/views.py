@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect # noqa
 from django.shortcuts import get_object_or_404, render # noqa
 from django.urls import reverse, reverse_lazy # noqa
@@ -57,7 +59,7 @@ from webargs.djangoparser import use_args, use_kwargs # noqa
 #         )
 
 
-class GroupListView(ListView):
+class GroupListView(LoginRequiredMixin, ListView):
     model = Group
     form_class = GroupBaseForm
     success_url = reverse_lazy('groups:list')
@@ -81,11 +83,17 @@ class GroupListView(ListView):
 #     )
 
 
-class GroupCreateView(CreateView):
+class GroupCreateView(LoginRequiredMixin, CreateView):
     model = Group
     form_class = GroupCreateForm
     success_url = reverse_lazy('groups:list')
     template_name = 'groups/create.html'
+
+    def form_valid(self, form):
+        result = super().form_valid(form)
+        messages.success(self.request, 'A new student successfully added')
+
+        return result
 
 # def create_group(request):
 #
@@ -108,7 +116,7 @@ class GroupCreateView(CreateView):
 #     )
 
 
-class GroupUpdateView(UpdateView):
+class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group
     form_class = GroupUpdateForm
     success_url = reverse_lazy('groups:list')
@@ -138,7 +146,7 @@ class GroupUpdateView(UpdateView):
 #     )
 
 
-class GroupDeleteView(DeleteView):
+class GroupDeleteView(LoginRequiredMixin, DeleteView):
     model = Group
     form_class = GroupDeleteForm
     success_url = reverse_lazy('groups:list')
