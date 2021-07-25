@@ -51,10 +51,10 @@ class GroupUpdateForm(GroupBaseForm):
 class GroupDeleteForm(GroupBaseForm):
     pass
 
-# class GroupsFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = Group
-#         fields = {
-#             'first_name': ['exact', 'icontains'],
-#             'last_name': ['exact', 'startswith'],
-#         }
+class GroupsFilter(django_filters.FilterSet):
+    class Meta:
+        model = Group
+        fields = {
+            'first_name': ['exact', 'icontains'],
+            'last_name': ['exact', 'startswith'],
+        }
