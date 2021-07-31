@@ -49,9 +49,15 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="/about/" tabindex="-1" >About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/contacts/" tabindex="-1" >Contacts</a>
         </li>
       </ul>
+      {% if user.is_authenticated %}
+          <div><img class="rounded-circle p-1 m-1" widht="40" height="40" src="{{user.profile.avatar.url}}"></div>
+           {% endif %}
       <ul class="navbar-nav d-flex">
          <li class="nav-item dropdown">
            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -61,7 +67,7 @@
            {% if user.is_authenticated %}
                <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Sign Out</a></li>
                <li><hr class="dropdown-divider"></li>
-               <li><a class="dropdown-item" href="#">Profile {{ user.username }}</a></li>
+               <li><a class="dropdown-item" href="{% url 'accounts:profile_update' %}">Profile {{ user.username }}</a></li>
                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change password</a></li>
            {% else %}
              <li><a class="dropdown-item" href="{% url 'accounts:login' %}">Sign In</a></li>

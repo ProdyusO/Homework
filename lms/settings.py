@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
 
+    'ckeditor',
     'debug_toolbar',
     'django_extensions',
     'django_filters',
@@ -59,8 +62,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'core.middlewares.MiddleWare'
+    'core.middlewares.MiddleWare',
+    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'lms.urls'
 
@@ -77,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.get_params',
             ],
         },
     },
@@ -132,7 +139,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
+
+CKEDITOR_UPLOAD_PATH = '/uploads/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
